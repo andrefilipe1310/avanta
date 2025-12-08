@@ -1,0 +1,70 @@
+.stepper-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  flex: 1; // Faz a linha ocupar o espaço disponível
+
+  &:last-child {
+    flex: 0; // O último item não precisa esticar
+  }
+
+  // --- Estados do Step ---
+  
+  // 1. Estado Completado (Passado)
+  &.completed {
+    .step-circle {
+      background: var(--ion-color-success);
+      border-color: var(--ion-color-success);
+      color: white;
+    }
+    .step-line {
+      background: var(--ion-color-success);
+    }
+  }
+
+  // 2. Estado Ativo (Atual)
+  &.active {
+    .step-circle {
+      background: var(--ion-color-primary);
+      border-color: var(--ion-color-primary);
+      color: white;
+      transform: scale(1.1); // Leve destaque de tamanho
+      box-shadow: 0 0 10px rgba(var(--ion-color-primary-rgb), 0.4);
+    }
+    // A linha a frente do ativo continua cinza
+  }
+}
+
+// --- Elementos ---
+
+.step-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--ion-color-light); // Fundo padrão (pendente)
+  border: 2px solid var(--ion-color-medium-shade);
+  color: var(--ion-color-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 2; // Fica acima da linha
+  transition: all 0.3s ease;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: var(--ion-color-light-shade);
+  margin: 0 5px; // Espacinho entre a bola e a linha
+  transition: background 0.3s ease;
+}

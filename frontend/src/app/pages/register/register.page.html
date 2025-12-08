@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="auth-container">
+
+    <div class="header-section">
+      <app-step-indicator 
+        [currentStep]="currentStep" 
+        [totalSteps]="totalSteps">
+      </app-step-indicator>
+
+      <h1>
+        <ng-container [ngSwitch]="currentStep">
+          <span *ngSwitchCase="1">Quem é você?</span>
+          <span *ngSwitchCase="2">Formação</span>
+          <span *ngSwitchCase="3">Suas Skills</span>
+          <span *ngSwitchCase="4">Match Cultural</span> </ng-container>
+      </h1>
+
+      <p class="subtitle">
+        Passo {{ currentStep }} de {{ totalSteps }}
+      </p>
+    </div>
+
+    <div *ngIf="currentStep === 1">
+      <app-identity-step 
+        [prefilledData]="socialLoginData"
+        (stepData)="handleIdentityStep($event)">
+      </app-identity-step>
+    </div>
+
+    <div *ngIf="currentStep === 2">
+      <app-academic-step 
+        (stepData)="handleAcademicStep($event)">
+      </app-academic-step>
+    </div>
+
+    <div *ngIf="currentStep === 3">
+      <app-skills-step 
+        (stepData)="handleSkillsStep($event)">
+      </app-skills-step>
+    </div>
+
+    <div *ngIf="currentStep === 4">
+      <app-match-step 
+        (stepData)="handleMatchStep($event)">
+      </app-match-step>
+    </div>
+
+    <ion-button 
+      expand="block" 
+      class="primary-btn ion-margin-top" 
+      (click)="nextStep()"
+      [disabled]="!isStepValid">
+      {{ currentStep === totalSteps ? 'Finalizar Cadastro' : 'Continuar' }}
+    </ion-button>
+
+    <div class="toggle-mode-container">
+      <p>Já possui conta? 
+        <ion-router-link routerLink="/login" color="primary">Fazer login</ion-router-link>
+      </p>
+    </div>
+
+  </div>
+</ion-content>

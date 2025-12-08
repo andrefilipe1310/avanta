@@ -1,0 +1,63 @@
+<div class="step-container">
+
+  <div class="list-section">
+    <div class="section-header">
+      <h3>Formação Acadêmica</h3>
+      <ion-button fill="clear" size="small" (click)="openAddModal('academic')">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Adicionar
+      </ion-button>
+    </div>
+
+    <div *ngIf="academicList.length === 0" class="empty-state" (click)="openAddModal('academic')">
+      <p>Nenhuma formação adicionada.</p>
+      <span>Toque para incluir faculdade/graduação</span>
+    </div>
+
+    <ion-list *ngIf="academicList.length > 0" lines="none">
+      <ion-item-sliding *ngFor="let item of academicList; let i = index">
+        <ion-item class="custom-item">
+          <ion-icon name="school" slot="start" color="primary"></ion-icon>
+          <ion-label>
+            <h2>{{ item.degree }} - {{ item.fieldOfStudy }}</h2>
+            <p>{{ item.institution }} • {{ item.year }}</p>
+          </ion-label>
+          <ion-button slot="end" fill="clear" color="danger" (click)="removeItem('academic', i)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="list-section">
+    <div class="section-header">
+      <h3>Cursos & Certificações</h3>
+      <ion-button fill="clear" size="small" (click)="openAddModal('course')">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Adicionar
+      </ion-button>
+    </div>
+
+    <div *ngIf="coursesList.length === 0" class="empty-state" (click)="openAddModal('course')">
+      <p>Nenhum curso extra.</p>
+      <span>Bootcamps, workshops, idiomas...</span>
+    </div>
+
+    <ion-list *ngIf="coursesList.length > 0" lines="none">
+      <ion-item *ngFor="let item of coursesList; let i = index" class="custom-item">
+        <ion-icon name="ribbon" slot="start" color="secondary"></ion-icon>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p>{{ item.institution }} • {{ item.hours }}h</p>
+        </ion-label>
+        <ion-button slot="end" fill="clear" color="medium" (click)="removeItem('course', i)">
+          <ion-icon name="trash" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</div>

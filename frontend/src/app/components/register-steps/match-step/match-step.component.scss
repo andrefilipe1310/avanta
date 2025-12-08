@@ -1,0 +1,104 @@
+.step-container {
+  padding-top: 1rem;
+}
+
+.section {
+  margin-bottom: 1.5rem;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    margin: 0 0 0.3rem 0;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: var(--ion-color-medium);
+    margin: 0 0 1rem 0;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: var(--ion-color-light-shade);
+  margin: 1.5rem 0;
+}
+
+// --- Cards Grid System ---
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 colunas em telas maiores
+  gap: 0.8rem;
+
+  @media (max-width: 360px) {
+    grid-template-columns: repeat(2, 1fr); // 2 colunas em telas pequenas
+  }
+}
+
+.selection-card {
+  background: var(--ion-color-light);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 100px;
+
+  ion-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--ion-color-medium);
+  }
+
+  span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ion-color-medium-shade);
+    line-height: 1.2;
+  }
+
+  // Estado Selecionado
+  &.selected {
+    background: var(--ion-color-primary-tint); // Fundo azulzinho
+    border-color: var(--ion-color-primary);
+    
+    ion-icon {
+      color: var(--ion-color-primary);
+      transform: scale(1.1);
+    }
+
+    span {
+      color: var(--ion-color-primary-contrast); // Ou primary-shade
+      color: var(--ion-color-primary-shade);
+    }
+  }
+}
+
+// --- Chips Styles ---
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+ion-chip {
+  --background: transparent;
+  border: 1px solid var(--ion-color-medium-shade);
+  margin: 0;
+
+  &.active {
+    --background: var(--ion-color-secondary); // Usando cor secundária para diferenciar
+    --color: white;
+    border-color: var(--ion-color-secondary);
+
+    ion-icon {
+      color: white;
+    }
+  }
+}

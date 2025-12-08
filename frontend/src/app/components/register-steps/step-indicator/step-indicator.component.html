@@ -1,0 +1,17 @@
+<div class="stepper-wrapper">
+  
+  <div *ngFor="let step of stepsArray; let i = index" 
+       class="step-item"
+       [class.active]="step === currentStep"
+       [class.completed]="step < currentStep">
+    
+    <div class="step-circle">
+      <ion-icon *ngIf="step < currentStep" name="checkmark"></ion-icon>
+      <span *ngIf="step >= currentStep">{{ step }}</span>
+    </div>
+
+    <div class="step-line" *ngIf="i < (totalSteps - 1)"></div>
+
+  </div>
+
+</div>

@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="auth-container">
+    
+    <div class="header-section">
+      <h1>Bem-vindo de volta</h1>
+      <p class="subtitle">Acesse sua conta para continuar</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      
+      <ion-input
+        mode="md"
+        label="Email"
+        label-placement="floating"
+        fill="outline"
+        type="email"
+        formControlName="email"
+        errorText="Email inválido"
+        class="custom-input">
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        label="Senha"
+        label-placement="floating"
+        fill="outline"
+        [type]="showPassword ? 'text' : 'password'"
+        formControlName="password"
+        errorText="A senha é obrigatória"
+        class="custom-input">
+        <ion-button fill="clear" slot="end" (click)="showPassword = !showPassword">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-input>
+
+      <div class="forgot-password">
+        <ion-button fill="clear" size="small" color="medium">Esqueceu a senha?</ion-button>
+      </div>
+
+      <ion-button expand="block" type="submit" class="primary-btn" [disabled]="loginForm.invalid">
+        Entrar
+      </ion-button>
+    </form>
+
+    <div class="divider"><span>ou entre com</span></div>
+
+    <div class="social-actions">
+      <ion-button class="social-btn google" (click)="loginWithGoogle()">
+        <ion-icon name="logo-google" slot="start"></ion-icon> Google
+      </ion-button>
+      <ion-button class="social-btn linkedin" (click)="loginWithLinkedIn()">
+        <ion-icon name="logo-linkedin" slot="start"></ion-icon> LinkedIn
+      </ion-button>
+    </div>
+
+    <div class="toggle-mode-container">
+      <p>Não tem uma conta? 
+        <ion-router-link [routerLink]="['/register']" color="primary">Criar agora</ion-router-link>
+      </p>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ type === 'academic' ? 'Nova Formação' : 'Novo Curso' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    
+    <ng-container *ngIf="type === 'academic'">
+      <ion-input
+        mode="md"
+        label="Instituição"
+        label-placement="floating"
+        fill="outline"
+        formControlName="institution"
+        placeholder="Ex: USP, Estácio..."
+        class="custom-input">
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        label="Grau / Tipo"
+        label-placement="floating"
+        fill="outline"
+        formControlName="degree"
+        placeholder="Ex: Bacharelado, MBA"
+        class="custom-input">
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        label="Área de Estudo"
+        label-placement="floating"
+        fill="outline"
+        formControlName="fieldOfStudy"
+        placeholder="Ex: Sistemas de Informação"
+        class="custom-input">
+      </ion-input>
+    </ng-container>
+
+    <ng-container *ngIf="type === 'course'">
+      <ion-input
+        mode="md"
+        label="Nome do Curso"
+        label-placement="floating"
+        fill="outline"
+        formControlName="name"
+        class="custom-input">
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        label="Instituição / Plataforma"
+        label-placement="floating"
+        fill="outline"
+        formControlName="institution"
+        placeholder="Ex: Udemy, Alura"
+        class="custom-input">
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        label="Carga Horária (horas)"
+        label-placement="floating"
+        fill="outline"
+        type="number"
+        formControlName="hours"
+        class="custom-input">
+      </ion-input>
+    </ng-container>
+
+    <ion-input
+      mode="md"
+      label="Ano de Conclusão"
+      label-placement="floating"
+      fill="outline"
+      type="number"
+      formControlName="year"
+      class="custom-input">
+    </ion-input>
+
+    <ion-button expand="block" type="submit" class="primary-btn ion-margin-top" [disabled]="form.invalid">
+      Salvar
+    </ion-button>
+
+  </form>
+</ion-content>

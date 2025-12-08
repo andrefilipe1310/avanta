@@ -1,0 +1,76 @@
+// Estilização compartilhada (pode copiar para o modal também)
+.custom-input {
+  margin-bottom: 1rem;
+  --border-radius: 8px;
+}
+
+.primary-btn {
+  --border-radius: 8px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+// Estilos específicos da Lista (Step Component)
+.step-container {
+  padding-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+}
+
+.empty-state {
+  border: 2px dashed var(--ion-color-medium-shade);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--ion-color-medium);
+  cursor: pointer;
+  background: var(--ion-color-light-tint);
+  transition: 0.2s;
+
+  &:active {
+    background: var(--ion-color-light);
+  }
+
+  p {
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+  }
+  
+  span {
+    font-size: 0.8rem;
+  }
+}
+
+.custom-item {
+  --background: var(--ion-color-light);
+  --border-radius: 12px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
+  ion-icon {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+}
+
+.divider {
+  height: 1px;
+  background: var(--ion-color-light-shade);
+  margin: 2rem 0;
+}

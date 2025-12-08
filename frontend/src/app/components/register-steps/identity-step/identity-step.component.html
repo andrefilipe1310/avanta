@@ -1,0 +1,62 @@
+<div class="step-container">
+  
+  <form [formGroup]="identityForm">
+    
+    <div class="avatar-section">
+      <div class="avatar-wrapper" (click)="triggerImageUpload()">
+        <img [src]="avatarPreview || 'assets/images/default-avatar-placeholder.png'" alt="Avatar" class="avatar-img">
+        
+        <div class="camera-icon-overlay">
+          <ion-icon name="camera"></ion-icon>
+        </div>
+      </div>
+      <p class="avatar-hint">Toque para alterar a foto</p>
+      
+      <input type="file" id="avatarInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+    </div>
+
+    <div class="inputs-section">
+      
+      <ion-input
+        mode="md"
+        label="Nome Completo"
+        label-placement="floating"
+        fill="outline"
+        formControlName="fullName"
+        errorText="Nome é obrigatório"
+        class="custom-input">
+      </ion-input>
+
+      <h3 class="section-title">Presença Digital <small>(Opcional)</small></h3>
+
+      <ion-input
+        mode="md"
+        placeholder="Link do LinkedIn"
+        fill="outline"
+        formControlName="linkedinUrl"
+        class="custom-input social-input">
+        <ion-icon slot="start" name="logo-linkedin" color="primary"></ion-icon>
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        placeholder="Link do GitHub"
+        fill="outline"
+        formControlName="githubUrl"
+        class="custom-input social-input">
+        <ion-icon slot="start" name="logo-github" color="dark"></ion-icon>
+      </ion-input>
+
+      <ion-input
+        mode="md"
+        placeholder="Link do Portfolio / Site"
+        fill="outline"
+        formControlName="portfolioUrl"
+        class="custom-input social-input">
+        <ion-icon slot="start" name="globe" color="medium"></ion-icon>
+      </ion-input>
+
+    </div>
+
+  </form>
+</div>
