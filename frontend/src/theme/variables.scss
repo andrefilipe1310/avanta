@@ -1,2 +1,38 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+// Brand color variables (from DIRECIONAMENTOS.md)
+$primary-dark: #2e1735; // Oxo Escuro - Títulos, branding
+$primary-accent: #a47197; // Ameixa Suave - Acentos visuais
+$primary-cta: #957e9c; // Roxo Acinzentado - CTAs
+$neutral-text: #949598; // Cinza Neutro - textos secundários
+$neutral-bg: #f9fafb; // Fundo Off-White - fundo principal
+$neutral-border: #e5e5e6; // Cinza Suave - bordas/inputs
+
+$white: #ffffff;
+// Brand-specific helpers
+$linkedin-blue: #0077b5;
+$success: #10dc60;
+
+// Ionic color mapping
+$colors: (
+	primary: $primary-cta,
+	secondary: $primary-accent,
+	tertiary: $primary-dark,
+	success: #10dc60,
+	warning: #ffce00,
+	danger: #f04141,
+	light: $neutral-bg,
+	medium: $neutral-text,
+	dark: $primary-dark
+);
+
+// Export CSS variables for runtime (optional)
+:root {
+	--ion-color-primary: #{$primary-cta};
+	--ion-color-secondary: #{$primary-accent};
+	--ion-color-tertiary: #{$primary-dark};
+	--ion-color-medium: #{$neutral-text};
+	--ion-background-color: #{$neutral-bg};
+	--ion-border-color: #{$neutral-border};
+}

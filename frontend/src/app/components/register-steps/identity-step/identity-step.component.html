@@ -1,31 +1,56 @@
 <div class="step-container">
-  
+
   <form [formGroup]="identityForm">
-    
+
     <div class="avatar-section">
       <div class="avatar-wrapper" (click)="triggerImageUpload()">
         <img [src]="avatarPreview || 'assets/images/default-avatar-placeholder.png'" alt="Avatar" class="avatar-img">
-        
+
         <div class="camera-icon-overlay">
           <ion-icon name="camera"></ion-icon>
         </div>
       </div>
       <p class="avatar-hint">Toque para alterar a foto</p>
-      
+
       <input type="file" id="avatarInput" (change)="onFileSelected($event)" accept="image/*" hidden>
     </div>
 
     <div class="inputs-section">
-      
-      <ion-input
-        mode="md"
-        label="Nome Completo"
-        label-placement="floating"
-        fill="outline"
-        formControlName="fullName"
-        errorText="Nome é obrigatório"
-        class="custom-input">
-      </ion-input>
+
+      <ion-item>
+        <ion-label position="floating">Nome</ion-label>
+        <ion-input mode="md" formControlName="firstName" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error" [hidden]="!(identityForm.get('firstName')?.touched && identityForm.get('firstName')?.invalid)">
+        Nome é obrigatório (mínimo 2 caracteres)
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Sobrenome</ion-label>
+        <ion-input mode="md" formControlName="lastName" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error" [hidden]="!(identityForm.get('lastName')?.touched && identityForm.get('lastName')?.invalid)">
+        Sobrenome é obrigatório (mínimo 2 caracteres)
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input mode="md" type="email" formControlName="email" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="error" [hidden]="!(identityForm.get('email')?.touched && identityForm.get('email')?.invalid)">
+        Insira um email válido
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input mode="md" type="password" formControlName="password" class="custom-input"></ion-input>
+      </ion-item>
+      <div class="hint">Senha mínima de 8 caracteres</div>
+      <div class="error" [hidden]="!(identityForm.get('password')?.touched && identityForm.get('password')?.invalid)">
+        Senha é obrigatória (mínimo 8 caracteres)
+      </div>
+
+     
 
       <h3 class="section-title">Presença Digital <small>(Opcional)</small></h3>
 
@@ -57,6 +82,12 @@
       </ion-input>
 
     </div>
-
+     <ion-item lines="none">
+        <ion-checkbox slot="start" formControlName="consent"></ion-checkbox>
+        <ion-label>Li e aceito os <a href="#">Termos de Serviço</a> e a <a href="#">Política de Privacidade</a></ion-label>
+      </ion-item>
+      <div class="error" [hidden]="!(identityForm.get('consent')?.touched && identityForm.get('consent')?.invalid)">
+        É necessário aceitar os termos para continuar
+      </div>
   </form>
 </div>

@@ -45,11 +45,20 @@
       </app-match-step>
     </div>
 
+    <div *ngIf="currentStep === totalSteps" class="consent-wrapper">
+      <ion-item lines="none">
+        <ion-checkbox slot="start" [checked]="consentGiven" (ionChange)="onConsentChange($event)"></ion-checkbox>
+        <ion-label>
+          Li e aceito os termos de uso e a política de privacidade.
+        </ion-label>
+      </ion-item>
+    </div>
+
     <ion-button 
       expand="block" 
       class="primary-btn ion-margin-top" 
       (click)="nextStep()"
-      [disabled]="!isStepValid">
+      [disabled]="isContinueDisabled">
       {{ currentStep === totalSteps ? 'Finalizar Cadastro' : 'Continuar' }}
     </ion-button>
 

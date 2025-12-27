@@ -1,3 +1,5 @@
+@import '../../../../theme/variables.scss';
+
 .step-container {
   padding-top: 1rem;
 }
@@ -8,20 +10,20 @@
   h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--ion-color-dark);
+    color: $primary-dark;
     margin: 0 0 0.3rem 0;
   }
 
   .subtitle {
     font-size: 0.9rem;
-    color: var(--ion-color-medium);
+    color: $neutral-text;
     margin: 0 0 1rem 0;
   }
 }
 
 .divider {
   height: 1px;
-  background: var(--ion-color-light-shade);
+  background: $neutral-border;
   margin: 1.5rem 0;
 }
 
@@ -36,8 +38,8 @@
   }
 }
 
-.selection-card {
-  background: var(--ion-color-light);
+selection-card {
+  background: $neutral-bg;
   border: 2px solid transparent;
   border-radius: 12px;
   padding: 1rem 0.5rem;
@@ -50,34 +52,33 @@
   transition: all 0.2s ease;
   min-height: 100px;
 
-  ion-icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: var(--ion-color-medium);
-  }
-
-  span {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--ion-color-medium-shade);
-    line-height: 1.2;
-  }
-
-  // Estado Selecionado
-  &.selected {
-    background: var(--ion-color-primary-tint); // Fundo azulzinho
-    border-color: var(--ion-color-primary);
-    
     ion-icon {
-      color: var(--ion-color-primary);
-      transform: scale(1.1);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: $neutral-text;
     }
 
     span {
-      color: var(--ion-color-primary-contrast); // Ou primary-shade
-      color: var(--ion-color-primary-shade);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #{darken($neutral-text, 6%)};
+      line-height: 1.2;
     }
-  }
+
+  // Estado Selecionado
+    &.selected {
+      background: #{lighten($primary-cta, 18%)}; // Fundo suave derivado do CTA
+      border-color: $primary-cta;
+
+      ion-icon {
+        color: $primary-cta;
+        transform: scale(1.1);
+      }
+
+      span {
+        color: $primary-dark;
+      }
+    }
 }
 
 // --- Chips Styles ---
@@ -89,16 +90,16 @@
 
 ion-chip {
   --background: transparent;
-  border: 1px solid var(--ion-color-medium-shade);
+  border: 1px solid #{darken($neutral-text, 6%)};
   margin: 0;
 
   &.active {
-    --background: var(--ion-color-secondary); // Usando cor secundária para diferenciar
-    --color: white;
-    border-color: var(--ion-color-secondary);
+    --background: #{$primary-accent}; // Usando cor secundária para diferenciar
+    --color: $white;
+    border-color: $primary-accent;
 
     ion-icon {
-      color: white;
+      color: $white;
     }
   }
 }

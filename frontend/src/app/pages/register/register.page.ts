@@ -9,6 +9,8 @@ import { AcademicStepComponent } from 'src/app/components/register-steps/academi
 import { SkillsStepComponent } from 'src/app/components/register-steps/skills-step/skills-step.component';
 import { MatchStepComponent } from 'src/app/components/register-steps/match-step/match-step.component'; // <--- Novo Import
 import { StepIndicatorComponent } from 'src/app/components/register-steps/step-indicator/step-indicator.component';
+import { OnboardingService } from 'src/app/services/onboarding.service';
+import { ProfileDNA } from 'src/app/core/models/dna.model';
 
 @Component({
   selector: 'app-register',
@@ -38,40 +40,89 @@ export class RegisterPage {
   socialLoginData = {
     name: 'Deco Developer',
     linkedin: 'linkedin.com/in/deco',
-    photoUrl: null
+    photoUrl: null,
+    email: 'deco@example.com'
   };
 
-  identityData: any = null;
-  academicData: any = null;
-  skillsData: any = null;
-  matchData: any = null; // <--- Dados do Step 4
+  profile: ProfileDNA = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    socialProviderId: null,
+    consentTimestamp: null,
+    interestsMacro: [],
+    interestsSub: [],
+    competenciesSelf: [],
+    otherCompetencies: [],
+    targetRole: null,
+    companyPreferences: [],
+    academicBackground: [],
+    courses: []
+  } as ProfileDNA;
 
-  constructor() {}
+  // Consent control for final step
+  consentGiven: boolean = false;
+
+  constructor(private onboardingService: OnboardingService) {}
 
   // --- Handlers (Recebem dados dos filhos) ---
 
   // Passo 1: Identidade
   handleIdentityStep(event: { isValid: boolean, data: any }) {
     this.isStepValid = event.isValid;
-    this.identityData = event.data;
+    const data: ProfileDNA = event.data;
+    // Merge identity fields into profile
+    this.profile.firstName = data.firstName || this.profile.firstName;
+    this.profile.lastName = data.lastName || this.profile.lastName;
+    this.profile.email = data.email || this.profile.email;
+    this.profile.password = data.password || this.profile.password;
+    this.profile.consentTimestamp = data.consentTimestamp || this.profile.consentTimestamp;
+    // socialProviderId kept if provided later
   }
 
   // Passo 2: Acadêmico
   handleAcademicStep(event: { isValid: boolean, data: any }) {
     this.isStepValid = event.isValid;
-    this.academicData = event.data;
+    // event.data contains { academic, courses }
+    this.profile.academicBackground = event.data.academic || [];
+    this.profile.courses = event.data.courses || [];
   }
 
   // Passo 3: Competências
   handleSkillsStep(event: { isValid: boolean, data: any }) {
     this.isStepValid = event.isValid;
-    this.skillsData = event.data;
+    // event.data contains { interests, skills }
+    this.profile.interestsMacro = event.data.interests || [];
+    // Map selected skills to otherCompetencies (could be mapped to competenciesSelf later)
+    this.profile.otherCompetencies = event.data.skills || [];
   }
 
   // Passo 4: Match Cultural (Novo)
   handleMatchStep(event: { isValid: boolean, data: any }) {
     this.isStepValid = event.isValid;
-    this.matchData = event.data;
+    // event.data contains preferences
+    this.profile.companyPreferences = event.data.companyTypePreference || [];
+    // prefer workModelPreference and sectorPreference stored in companyPreferences as well
+    this.profile.companyPreferences = [
+      ...(this.profile.companyPreferences || []),
+      ...(event.data.workModelPreference || []),
+      ...(event.data.sectorPreference || [])
+    ];
+  }
+
+  // Consent change handler (from template checkbox)
+  onConsentChange(e: any) {
+    const checked = !!e?.detail?.checked;
+    this.consentGiven = checked;
+    this.profile.consentTimestamp = checked ? new Date().toISOString() : null;
+  }
+
+  // Computed disabled state for the primary CTA
+  get isContinueDisabled(): boolean {
+    if (this.currentStep === this.totalSteps) {
+      return !this.isStepValid || !this.consentGiven;
+    }
+    return !this.isStepValid;
   }
 
   // --- Navegação ---
@@ -93,17 +144,21 @@ export class RegisterPage {
   // Envio final dos dados
   finishRegistration() {
     // Monta o objeto final conforme esperado pelo Backend Java
-    const finalPayload = {
-      ...this.identityData, // Espalha nome, avatar, links
-      academicBackground: this.academicData,
-      skillsAndInterests: this.skillsData,
-      preferences: this.matchData // <--- Inclui preferências de trabalho
-    };
+    // Envia o objeto consolidado `profile`
+    const finalPayload: ProfileDNA = this.profile;
 
     console.log('--- CADASTRO COMPLETO ---');
     console.log('Payload para API:', finalPayload);
     
-    // Exemplo de chamada de serviço:
-    // this.authService.register(finalPayload).subscribe(...)
+    // Usa serviço de onboarding mock
+    this.onboardingService.saveProfile(finalPayload).subscribe({
+      next: res => {
+        console.log('Resposta do serviço:', res);
+        // redirecionar para painel ou mostrar sucesso
+      },
+      error: err => {
+        console.error('Erro ao salvar perfil', err);
+      }
+    });
   }
 }

@@ -1,3 +1,5 @@
+@import '../../../../theme/variables.scss';
+
 // Estilização compartilhada (pode copiar para o modal também)
 .custom-input {
   margin-bottom: 1rem;
@@ -24,23 +26,23 @@
   h3 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--ion-color-dark);
+    color: $primary-dark;
     margin: 0;
   }
 }
 
 .empty-state {
-  border: 2px dashed var(--ion-color-medium-shade);
+  border: 2px dashed #{darken($neutral-text, 6%)};
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
-  color: var(--ion-color-medium);
+  color: $neutral-text;
   cursor: pointer;
-  background: var(--ion-color-light-tint);
+  background: #{lighten($neutral-bg, 6%)};
   transition: 0.2s;
 
   &:active {
-    background: var(--ion-color-light);
+    background: $neutral-bg;
   }
 
   p {
@@ -54,7 +56,7 @@
 }
 
 .custom-item {
-  --background: var(--ion-color-light);
+  --background: #{$neutral-bg};
   --border-radius: 12px;
   margin-bottom: 0.8rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -71,6 +73,6 @@
 
 .divider {
   height: 1px;
-  background: var(--ion-color-light-shade);
+  background: $neutral-border;
   margin: 2rem 0;
 }

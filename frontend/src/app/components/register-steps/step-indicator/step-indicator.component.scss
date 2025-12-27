@@ -1,3 +1,5 @@
+@import '../../../../theme/variables.scss';
+
 .stepper-wrapper {
   display: flex;
   align-items: center;
@@ -21,23 +23,23 @@
   // 1. Estado Completado (Passado)
   &.completed {
     .step-circle {
-      background: var(--ion-color-success);
-      border-color: var(--ion-color-success);
-      color: white;
+      background: $success;
+      border-color: $success;
+      color: $white;
     }
     .step-line {
-      background: var(--ion-color-success);
+      background: $success;
     }
   }
 
   // 2. Estado Ativo (Atual)
   &.active {
     .step-circle {
-      background: var(--ion-color-primary);
-      border-color: var(--ion-color-primary);
-      color: white;
+      background: $primary-cta;
+      border-color: $primary-cta;
+      color: $white;
       transform: scale(1.1); // Leve destaque de tamanho
-      box-shadow: 0 0 10px rgba(var(--ion-color-primary-rgb), 0.4);
+      box-shadow: 0 0 10px rgba($primary-cta, 0.4);
     }
     // A linha a frente do ativo continua cinza
   }
@@ -49,9 +51,9 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--ion-color-light); // Fundo padrão (pendente)
-  border: 2px solid var(--ion-color-medium-shade);
-  color: var(--ion-color-medium);
+  background: $neutral-bg; // Fundo padrão (pendente)
+  border: 2px solid #{darken($neutral-text, 6%)};
+  color: $neutral-text;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,7 +66,7 @@
 .step-line {
   flex: 1;
   height: 2px;
-  background: var(--ion-color-light-shade);
+  background: $neutral-border;
   margin: 0 5px; // Espacinho entre a bola e a linha
   transition: background 0.3s ease;
 }

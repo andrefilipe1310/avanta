@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { camera, logoLinkedin, logoGithub, globe } from 'ionicons/icons';
+import { ProfileDNA } from 'src/app/core/models/dna.model';
 
 @Component({
   selector: 'app-identity-step',
@@ -17,7 +18,7 @@ export class IdentityStepComponent implements OnInit {
   @Input() prefilledData: any = null;
 
   // Emite o status do formulário para o pai (RegisterPage)
-  @Output() stepData = new EventEmitter<{ isValid: boolean, data: any }>();
+  @Output() stepData = new EventEmitter<{ isValid: boolean, data: ProfileDNA }>();
 
   identityForm!: FormGroup;
   avatarPreview: string | ArrayBuffer | null = null; // Para mostrar a imagem selecionada
@@ -34,7 +35,10 @@ export class IdentityStepComponent implements OnInit {
   // Inicializa o formulário do step
   private initForm() {
     this.identityForm = this.fb.group({
-      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       linkedinUrl: [''],
       githubUrl: [''],
       portfolioUrl: [''],
@@ -43,9 +47,17 @@ export class IdentityStepComponent implements OnInit {
 
     // Observa mudanças para avisar a página pai em tempo real
     this.identityForm.valueChanges.subscribe(value => {
+      const payload: ProfileDNA = {
+        firstName: value.firstName || '',
+        lastName: value.lastName || '',
+        email: value.email || '',
+        password: value.password || undefined,
+        socialProviderId: null,
+      };
+
       this.stepData.emit({
         isValid: this.identityForm.valid,
-        data: value
+        data: payload
       });
     });
   }
@@ -53,13 +65,20 @@ export class IdentityStepComponent implements OnInit {
   // UX: Preenche dados se o usuário veio de login social
   private checkPrefilledData() {
     if (this.prefilledData) {
+      // Se o social já trouxe nome completo, tenta dividir em primeiro/sobrenome
+      const nameParts = (this.prefilledData.name || '').split(' ');
+      const first = nameParts.shift() || '';
+      const last = nameParts.join(' ') || '';
+
       this.identityForm.patchValue({
-        fullName: this.prefilledData.name,
+        firstName: first,
+        lastName: last,
+        email: this.prefilledData.email || '',
         linkedinUrl: this.prefilledData.linkedin,
         // Se tiver foto vindo da rede social:
         // avatar: this.prefilledData.photoUrl 
       });
-      
+
       if (this.prefilledData.photoUrl) {
         this.avatarPreview = this.prefilledData.photoUrl;
       }

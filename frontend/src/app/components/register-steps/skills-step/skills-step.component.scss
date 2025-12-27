@@ -1,3 +1,5 @@
+@import '../../../../theme/variables.scss';
+
 .step-container {
   padding-top: 1rem;
 }
@@ -8,20 +10,20 @@
   h3 {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--ion-color-dark);
+    color: $primary-dark;
     margin: 0 0 0.3rem 0;
   }
 
   p {
     font-size: 0.9rem;
-    color: var(--ion-color-medium);
+    color: $neutral-text;
     margin: 0;
   }
 }
 
 .divider {
   height: 1px;
-  background: var(--ion-color-light-shade);
+  background: $neutral-border;
   margin: 2rem 0;
 }
 
@@ -35,19 +37,19 @@
 ion-chip {
   margin: 0; // Remove margem padrão do ionic para controlar via gap
   font-weight: 500;
-  --background: var(--ion-color-light);
-  --color: var(--ion-color-medium-shade);
+  --background: #{$neutral-bg};
+  --color: #{darken($neutral-text, 6%)};
   transition: 0.2s ease-in-out;
 
   &.selected {
-    --background: var(--ion-color-primary-tint); // Um azul bem clarinho
-    --color: var(--ion-color-primary-contrast); // Cor do texto primário (geralmente branco ou azul escuro)
-    --border-color: var(--ion-color-primary);
-    border: 1px solid var(--ion-color-primary);
+    --background: #{lighten($primary-cta, 18%)}; // variação suave do CTA
+    --color: $white; // texto no chip
+    --border-color: $primary-cta;
+    border: 1px solid $primary-cta;
     
     // Se quiser o chip totalmente preenchido:
-    --background: var(--ion-color-primary);
-    --color: white;
+    --background: $primary-cta;
+    --color: $white;
   }
 }
 
@@ -61,14 +63,14 @@ ion-chip {
   ion-searchbar {
     padding: 0;
     --box-shadow: none;
-    --background: var(--ion-color-light);
+    --background: #{$neutral-bg};
     --border-radius: 8px;
   }
 }
 
 .suggestions-list {
-  background: white;
-  border: 1px solid var(--ion-color-light-shade);
+  background: $white;
+  border: 1px solid $neutral-border;
   border-radius: 8px;
   margin-bottom: 1rem;
   max-height: 200px;
@@ -84,14 +86,14 @@ ion-chip {
 .label-small {
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--ion-color-medium);
+  color: $neutral-text;
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
 
 .hint-text {
   font-size: 0.85rem;
-  color: var(--ion-color-medium-tint);
+  color: #{lighten($neutral-text, 18%)};
   font-style: italic;
   margin-top: 0.5rem;
 }

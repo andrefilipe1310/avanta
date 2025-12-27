@@ -12,6 +12,8 @@
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
+@import "./theme/variables.scss";
+
 /* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
@@ -34,7 +36,7 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
 
 
 
@@ -55,12 +57,12 @@
   h1 {
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--ion-color-dark);
+    color: $primary-dark;
     margin-bottom: 0.5rem;
   }
 
   .subtitle {
-    color: var(--ion-color-medium);
+    color: $neutral-text;
     font-size: 0.95rem;
     margin: 0;
   }
@@ -95,11 +97,11 @@
 
 // Link de navegação no rodapé
 .toggle-mode-container {
-  text-align: center;
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: var(--ion-color-medium);
 
+      &.linkedin {
+        --background: #{$linkedin-blue}; // Cor da marca LinkedIn definida nas variáveis
+        --color: $white;
+      }
   ion-router-link {
     font-weight: 600;
     text-decoration: none;
@@ -114,14 +116,14 @@
   align-items: center;
   text-align: center;
   margin: 2rem 0;
-  color: var(--ion-color-medium);
+  color: $neutral-text;
   font-size: 0.8rem;
 
   &::before,
   &::after {
     content: '';
     flex: 1;
-    border-bottom: 1px solid var(--ion-color-light-shade);
+    border-bottom: 1px solid $neutral-border;
   }
 
   span {
@@ -141,13 +143,13 @@
     text-transform: none;
     
     &.google {
-      --background: var(--ion-color-light);
-      --color: var(--ion-color-dark);
+      --background: #{$neutral-bg};
+      --color: $primary-dark;
     }
 
     &.linkedin {
-      --background: #0077b5; // Cor da marca LinkedIn
-      --color: white;
+      --background: #{$linkedin-blue}; // Cor da marca LinkedIn definida nas variáveis
+      --color: $white;
     }
   }
 }
